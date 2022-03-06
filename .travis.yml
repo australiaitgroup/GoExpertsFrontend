@@ -7,8 +7,7 @@ services:
     - docker
 before_install: 
     - docker build -t jamiepan/goexperts -f Dockerfile.dev .
-script:     
-    - docker run -e CI=true jamiepan/goexperts npm run test -- --coverage --watchAll=false
+script: skip
 
 deploy:
   provider: elasticbeanstalk

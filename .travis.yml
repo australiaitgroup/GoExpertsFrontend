@@ -1,0 +1,23 @@
+sudo: required 
+language: node_js
+node_js:
+    - "stable"
+    
+services: 
+    - docker
+before_install: 
+    - docker build -t jamiepan/goexperts -f Dockerfile.dev .
+script:     
+    - docker run -e CI=true jamiepan/goexperts npm run test -- --coverage --watchAll=false
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-2" ### AWS region of your choice
+  app: "goexperts" ### Your EB App name
+  env: "Goexperts-env" ### Your EB App environment name
+  bucket_name: "elasticbeanstalk-ap-southeast-2-934098609933" ### S3 bucket name
+  bucket_path: "EBApptest" ### S3 folder name under S3 bucket above
+  on:
+    branch: main
+  access_key_id: "AKIA5S7E5U4GVIRD3XNS"
+  secret_access_key: "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"

@@ -10,8 +10,6 @@ pipeline {
                 sh 'node -v'
                 echo 'npm version is below'
                 sh 'npm install'
-                
-                
             }
         }     
     }
